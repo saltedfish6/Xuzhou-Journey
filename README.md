@@ -141,8 +141,18 @@ xuzhou/
 └── package.json           # 项目配置
 ```
 
-
 ### 开发流程
+
+#### 个人开发(本项目就是个人开发者)
+```bash
+# 直接在主分支开发和提交
+git add .
+pnpm run cz
+git push origin main
+```
+
+#### 团队协作开发
+
 
 ```bash
 # 1. 创建功能分支
