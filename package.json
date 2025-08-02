@@ -14,6 +14,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@react-vant/icons": "^0.1.0",
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "lib-flexible": "^0.3.2",
