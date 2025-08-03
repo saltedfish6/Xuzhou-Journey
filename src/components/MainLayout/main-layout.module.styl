@@ -1,0 +1,74 @@
+// 移动端底部导航栏样式 - 悬浮设计
+.customTabbar
+    position fixed !important
+    bottom 60px !important
+    left 16px !important
+    right 16px !important
+    background rgba(224, 219, 219, 0.75) !important
+    border 1px solid rgba(0, 0, 0, 0.05)
+    border-radius 50px !important
+    padding 8px 0 12px 0
+    z-index 1000 !important
+    overflow: hidden; 
+    // 覆盖 react-vant 默认样式
+    :global(.rv-tabbar)
+        background transparent !important
+        border-top none !important
+        position static !important
+        
+    :global(.rv-tabbar-item)
+        padding 8px 10px
+        border-radius 35px
+        margin 0 4px
+        transition all 0.3s ease
+        
+        &:global(.rv-tabbar-item--active)
+            background rgba(255, 255, 255, 0.7)
+            transform translateY(-2px)
+            
+            :global(.rv-tabbar-item__icon)
+                color #000000
+                transform scale(1.1)
+                
+            :global(.rv-tabbar-item__text)
+                color #000000
+                font-weight 600
+                
+    :global(.rv-tabbar-item__icon)
+        font-size 34px !important
+        margin-bottom 6px
+        transition all 0.3s ease
+        
+    :global(.rv-tabbar-item__text)
+        font-size 20px !important
+        font-weight 500
+        transition all 0.3s ease
+
+// 小屏幕适配
+@media (max-width: 375px)
+    .customTabbar
+        bottom 16px !important
+        left 12px !important
+        right 12px !important
+        padding 6px 0 10px 0
+        
+        :global(.rv-tabbar-item)
+            padding 6px 8px
+        
+        :global(.rv-tabbar-item__icon)
+            font-size 32px !important
+            
+        :global(.rv-tabbar-item__text)
+            font-size 18px !important
+
+// 深色模式支持
+@media (prefers-color-scheme: dark)
+    .customTabbar
+        background rgba(44, 62, 80, 0.95) !important
+        border-color rgba(255, 255, 255, 0.1)
+        
+        :global(.rv-tabbar-item--active)
+            background rgba(79, 192, 141, 0.2)
+            
+        :global(.rv-tabbar-item__text)
+            color #ecf0f1
