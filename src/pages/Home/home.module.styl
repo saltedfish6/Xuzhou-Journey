@@ -1,0 +1,225 @@
+.home
+  min-height 100vh
+  background #f8f9fa
+  padding-bottom 60px // 为底部导航栏留出空间
+
+.header
+  position sticky
+  top 0
+  z-index 100
+  background white
+  padding 12px 16px
+  border-bottom 1px solid #f0f0f0
+
+.searchBar
+  display flex
+  align-items center
+  background #f5f5f5
+  border-radius 20px
+  padding 8px 16px
+  transition all 0.3s ease
+  position relative
+
+  &:active
+    background #e9ecef
+
+.searchIcon
+  width 40px
+  height 40px
+  color #666
+  margin-right 10px
+  flex-shrink 0
+
+.searchInput
+  flex 1
+  background transparent
+  border none
+  outline none
+  font-size 32px
+  color #333
+  padding 0
+  margin 0
+
+  &::placeholder
+    color #999
+
+.searchButton
+  background #007bff
+  color white
+  border none
+  border-radius 16px
+  padding 6px 16px
+  font-size 28px
+  margin-left 10px
+  cursor pointer
+  transition all 0.2s ease
+
+  &:active
+    background #0069d9
+
+.searchPanel
+  position absolute
+  top 100%
+  left 0
+  right 0
+  background white
+  border-radius 0 0 12px 12px
+  box-shadow 0 4px 12px rgba(0, 0, 0, 0.1)
+  margin-top 4px
+  padding 16px
+  max-height 70vh
+  overflow-y auto
+  z-index 101
+
+.sectionTitle
+  font-size 28px
+  color #666
+  margin 0 0 12px 0
+  padding-bottom 8px
+  border-bottom 1px solid #f0f0f0
+
+.suggestionsContainer
+  margin-bottom 20px
+
+.suggestionsList
+  list-style none
+  padding 0
+  margin 0
+
+.suggestionItem
+  display flex
+  align-items center
+  padding 12px 8px
+  font-size 30px
+  color #333
+  cursor pointer
+  border-radius 8px
+  transition background-color 0.2s ease
+
+  &:hover, &:active
+    background-color #f5f5f5
+
+.suggestionIcon
+  width 20px
+  height 20px
+  color #999
+  margin-right 12px
+  flex-shrink 0
+
+.hotSearchContainer
+  margin-bottom 10px
+
+.hotKeywordsList
+  display flex
+  flex-wrap wrap
+  gap 12px
+
+.hotKeywordItem
+  background #f5f5f5
+  color #333
+  padding 8px 16px
+  border-radius 16px
+  font-size 28px
+  cursor pointer
+  transition all 0.2s ease
+
+  &:hover, &:active
+    background #e0e0e0
+
+.tabs
+  display flex
+  background white
+  padding 0 16px
+  border-bottom 1px solid #f0f0f0
+  overflow-x auto
+  scrollbar-width none
+  -ms-overflow-style none
+
+  &::-webkit-scrollbar
+    display none
+
+.tab
+  flex-shrink 0
+  padding 12px 16px
+  font-size 32px
+  color #666
+  cursor pointer
+  position relative
+  transition color 0.3s ease
+
+  &.active
+    color #007bff
+    font-weight 600
+
+    &::after
+      content ''
+      position absolute
+      bottom 0
+      left 50%
+      transform translateX(-50%)
+      width 20px
+      height 2px
+      background #007bff
+      border-radius 1px
+
+.content
+  flex 1
+  overflow hidden
+
+.loadingContainer
+  display flex
+  justify-content center
+  align-items center
+  padding 60px 20px
+  color #666
+  font-size 32px
+
+.emptyContainer
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  padding 60px 20px
+  text-align center
+
+.emptyIcon
+  font-size 120px
+  margin-bottom 20px
+
+.emptyText
+  color #999
+  font-size 32px
+  line-height 1.6
+
+.waterfallContainer
+  padding 8px
+
+// 移动端优化
+@media (max-width: 768px)
+  .home
+    padding-bottom 50px
+
+  .header
+    padding 10px 12px
+
+  .searchBar
+    padding 10px 14px
+
+  .searchText
+    font-size 30px
+
+  .tab
+    padding 14px 18px
+    font-size 30px
+
+  .waterfallContainer
+    padding 8px
+
+  .loadingContainer
+    font-size 30px
+
+  .emptyText
+    font-size 30px
+
+  .emptyIcon
+    font-size 110px
