@@ -1,6 +1,6 @@
 // src/components/Waterfall/Waterfall.tsx
 import React, { useEffect } from 'react'
-import { useWaterfallSimple } from '@/hooks/useWaterfallSimple'
+import { useWaterfall } from '@/hooks/useWaterfall'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import styles from './waterfall.module.styl'
 
@@ -120,10 +120,13 @@ const Waterfall: React.FC<WaterfallProps> = ({
   columnCount = 2,
   gap = 10
 }) => {
-  const { columns, setLoading, setHasMore } = useWaterfallSimple(
-    items,
-    columnCount
-  )
+  const {
+    columns,
+    // loading: waterfallLoading,
+    // hasMore: waterfallHasMore,
+    setLoading,
+    setHasMore
+  } = useWaterfall(items, columnCount)
 
   const [loadMoreRef, , isLoadMoreVisible] = useIntersectionObserver({
     threshold: 0.1,
@@ -153,8 +156,12 @@ const Waterfall: React.FC<WaterfallProps> = ({
             className={styles.waterfallColumn}
             style={{ gap: `${gap}px` }}
           >
-            {column.items.map((item) => (
-              <WaterfallItem key={item.id} item={item} onClick={onItemClick} />
+            {column.items.map((item, itemIndex) => (
+              <WaterfallItem
+                key={`col_${columnIndex}_idx_${itemIndex}_id_${item.id}`}
+                item={item}
+                onClick={onItemClick}
+              />
             ))}
           </div>
         ))}

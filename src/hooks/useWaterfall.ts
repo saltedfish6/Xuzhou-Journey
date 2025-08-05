@@ -3,10 +3,14 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 export interface WaterfallItem {
   id: string | number
   height?: number
-  imageUrl?: string
+  imageUrl: string // 改为必需属性，与 WaterfallItemData 保持一致
+  title: string // 添加必需的 title 属性
+  description?: string
+  author?: string
+  likes?: number
   src?: string
   url?: string
-  [key: string]: string | number | boolean | undefined
+  [key: string]: string | number | undefined // 移除 boolean 类型，与 WaterfallItemData 保持一致
 }
 
 export interface WaterfallColumn {
@@ -76,7 +80,7 @@ export function useWaterfall(
             imageHeightCache.current.set(cacheKey, defaultHeight)
             resolve(defaultHeight)
           }
-          img.src = item.imageUrl || item.src || item.url
+          img.src = item.imageUrl || item.src || item.url || ''
         } else {
           // 没有图片，使用默认高度
           imageHeightCache.current.set(cacheKey, defaultHeight)
@@ -168,12 +172,21 @@ export function useWaterfall(
     setHasMore(hasMore)
   }, [])
 
+  // 用于跟踪初始项目的引用
+  const prevItemsRef = useRef<string>('')
+
   // 初始化时处理初始数据
   useEffect(() => {
     if (initialItems.length > 0) {
-      resetItems(initialItems)
+      // 使用一个标记来防止无限循环
+      const itemsJSON = JSON.stringify(initialItems.map((item) => item.id))
+
+      if (prevItemsRef.current !== itemsJSON) {
+        prevItemsRef.current = itemsJSON
+        resetItems(initialItems)
+      }
     }
-  }, [initialItems.length, resetItems]) // 添加 resetItems 依赖
+  }, [initialItems, resetItems]) // 添加完整的 initialItems 作为依赖
 
   return {
     columns,
