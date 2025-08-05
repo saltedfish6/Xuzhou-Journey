@@ -1,0 +1,104 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 20px;
+    background: white;
+    height: 88px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    
+    svg {
+        font-size: 32px;
+        color: #333;
+    }
+}
+
+.inputContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f7f8fa;
+    border-radius: 32px;
+    padding: 0 24px;
+    height: 64px;
+    position: relative;
+}
+
+.ipt {
+    flex: 1;
+    height: 64px;
+    line-height: 64px;
+    background: transparent;
+    color: #333;
+    font-size: 28px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    padding: 0;
+    
+    &::placeholder {
+        color: #969799;
+        font-size: 28px;
+    }
+}
+
+.clearButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    cursor: pointer;
+    color: #c8c9cc;
+    
+    svg {
+        font-size: 24px;
+    }
+    
+    &:hover {
+        color: #969799;
+    }
+}
+
+.searchButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 16px;
+    background: #ff2442;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        background: #e91e3a;
+    }
+    
+    &:active {
+        transform: scale(0.95);
+        background: #d11a33;
+    }
+    
+    svg {
+        font-size: 22px;
+        color: white;
+    }
+}
+
+// 小红书风格的搜索框聚焦效果
+.inputContainer:focus-within {
+    background: #f0f1f3;
+    box-shadow: 0 0 0 2px #ff2442;
+}
