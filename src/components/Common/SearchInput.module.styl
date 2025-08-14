@@ -1,0 +1,111 @@
+.searchInput
+  position: relative
+  display: flex
+  align-items: center
+  border-radius: var(--border-radius)
+  transition: var(--transition-normal)
+  overflow: hidden
+  
+  &:focus-within
+    box-shadow: var(--shadow-medium)
+  
+  &.disabled
+    opacity: 0.6
+    cursor: not-allowed
+
+.input
+  flex: 1
+  border: none
+  outline: none
+  background: transparent
+  font-size: inherit
+  color: var(--text-primary)
+  
+  &::placeholder
+    color: var(--text-secondary)
+    opacity: 0.7
+  
+  &:disabled
+    cursor: not-allowed
+
+.searchButton
+  border: none
+  background: transparent
+  cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: center
+  transition: var(--transition-fast)
+  color: var(--text-secondary)
+  
+  &:hover:not(:disabled)
+    color: var(--primary-color)
+  
+  &:disabled
+    cursor: not-allowed
+    opacity: 0.5
+
+.searchIcon
+  width: 1em
+  height: 1em
+
+// 尺寸变体
+.small
+  height: 32px
+  padding: 0 12px
+  font-size: 14px
+  
+  .searchButton
+    width: 32px
+    height: 32px
+
+.medium
+  height: 40px
+  padding: 0 16px
+  font-size: 16px
+  
+  .searchButton
+    width: 40px
+    height: 40px
+
+.large
+  height: 48px
+  padding: 0 20px
+  font-size: 18px
+  
+  .searchButton
+    width: 48px
+    height: 48px
+
+// 样式变体
+.default
+  background: var(--bg-primary)
+  border: 1px solid var(--border-color)
+  
+  &:focus-within
+    border-color: var(--primary-color)
+
+.glass
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  
+  .input
+    color: var(--text-primary)
+    
+    &::placeholder
+      color: rgba(255, 255, 255, 0.7)
+  
+  &:focus-within
+    border-color: rgba(255, 255, 255, 0.4)
+    background: rgba(255, 255, 255, 0.15)
+
+.minimal
+  background: transparent
+  border: none
+  border-bottom: 2px solid var(--border-color)
+  border-radius: 0
+  
+  &:focus-within
+    border-bottom-color: var(--primary-color)
+    box-shadow: none

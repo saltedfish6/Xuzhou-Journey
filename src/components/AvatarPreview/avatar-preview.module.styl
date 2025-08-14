@@ -1,0 +1,269 @@
+// 头像预览组件样式
+.overlay
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, 0.9)
+  z-index 9999
+  display flex
+  align-items center
+  justify-content center
+  animation fadeIn 0.3s ease-out
+
+.container
+  position relative
+  width 100%
+  height 100%
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+
+// 关闭按钮
+.closeBtn
+  position absolute
+  top 60px
+  left 32px
+  background transparent
+  border none
+  color rgba(255, 255, 255, 0.8)
+  padding 16px
+  cursor pointer
+  z-index 10
+  transition color 0.2s ease
+  
+  &:hover
+    color white
+
+// 头像容器
+.avatarContainer
+  flex 1
+  display flex
+  align-items center
+  justify-content center
+  padding 60px 40px 280px
+
+.avatar
+  width 180px
+  height 180px
+  border-radius 50%
+  overflow hidden
+  box-shadow 0 8px 32px rgba(0, 0, 0, 0.3)
+  
+  img
+    width 100%
+    height 100%
+    object-fit cover
+
+.defaultAvatar
+  width 100%
+  height 100%
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  display flex
+  align-items center
+  justify-content center
+  color white
+  font-size 32px
+  font-weight 600
+
+// 操作面板
+.actionPanel
+  position absolute
+  bottom 0
+  left 0
+  right 0
+  background rgba(40, 40, 40, 0.95)
+  backdrop-filter blur(20px)
+  border-radius 32px 32px 0 0
+  padding 48px 32px 80px
+  animation slideUp 0.3s ease-out
+
+.actionItem
+  display flex
+  align-items center
+  padding 32px 0
+  cursor pointer
+  transition background-color 0.2s ease
+  border-radius 16px
+  margin-bottom 8px
+  position relative
+  
+  &:hover
+    background rgba(255, 255, 255, 0.05)
+  
+  &:active
+    background rgba(255, 255, 255, 0.1)
+
+.actionIcon
+  width 48px
+  height 48px
+  border-radius 12px
+  background rgba(255, 255, 255, 0.1)
+  display flex
+  align-items center
+  justify-content center
+  margin-right 32px
+  color rgba(255, 255, 255, 0.8)
+
+.actionText
+  flex 1
+  color white
+  font-size 32px
+  font-weight 500
+
+.aiIcon, .frameIcon
+  position absolute
+  right 16px
+  font-size 24px
+
+// 动画
+@keyframes fadeIn
+  from
+    opacity 0
+  to
+    opacity 1
+
+@keyframes slideUp
+  from
+    transform translateY(100%)
+  to
+    transform translateY(0)
+
+// 响应式适配
+@media (max-width: 768px)
+  .avatarContainer
+    padding 1.07rem 0.8rem 7.47rem // 40px 30px 280px
+  
+  .avatar
+    width 4.8rem // 180px
+    height 4.8rem // 180px
+  
+  .defaultAvatar
+    font-size 0.85rem // 32px
+  
+  .actionPanel
+    padding 1.07rem 0.85rem 2.13rem // 40px 32px 80px
+  
+  .actionItem
+    padding 0.64rem 0 // 24px 0
+  
+  .actionIcon
+    width 1.07rem // 40px
+    height 1.07rem // 40px
+    margin-right 0.64rem // 24px
+  
+  .actionText
+    font-size 0.64rem // 24px
+
+@media (max-width: 480px)
+  .avatarContainer
+    padding 0.8rem 0.53rem 6.4rem // 30px 20px 240px
+  
+  .avatar
+    width 4.27rem // 160px
+    height 4.27rem // 160px
+  
+  .defaultAvatar
+    font-size 0.75rem // 28px
+  
+  .actionPanel
+    padding 0.8rem 0.64rem 1.6rem // 30px 24px 60px
+  
+  .actionItem
+    padding 0.53rem 0 // 20px 0
+  
+  .actionIcon
+    width 0.96rem // 36px
+    height 0.96rem // 36px
+    margin-right 0.53rem // 20px
+  
+  .actionText
+    font-size 0.59rem // 22px
+
+@media (max-width: 375px)
+  .avatarContainer
+    padding 0.67rem 0.43rem 5.33rem // 25px 16px 200px
+  
+  .avatar
+    width 3.73rem // 140px
+    height 3.73rem // 140px
+  
+  .defaultAvatar
+    font-size 0.67rem // 25px
+  
+  .closeBtn
+    top 1.33rem // 50px
+    left 0.67rem // 25px
+    padding 0.32rem // 12px
+  
+  .actionPanel
+    padding 0.67rem 0.53rem 1.33rem // 25px 20px 50px
+  
+  .actionItem
+    padding 0.43rem 0 // 16px 0
+  
+  .actionIcon
+    width 0.85rem // 32px
+    height 0.85rem // 32px
+    margin-right 0.43rem // 16px
+  
+  .actionText
+    font-size 0.53rem // 20px
+
+@media (max-width: 320px)
+  .avatarContainer
+    padding 0.53rem 0.32rem 4.8rem // 20px 12px 180px
+  
+  .avatar
+    width 3.2rem // 120px
+    height 3.2rem // 120px
+  
+  .defaultAvatar
+    font-size 0.59rem // 22px
+  
+  .closeBtn
+    top 1.07rem // 40px
+    left 0.53rem // 20px
+    padding 0.27rem // 10px
+  
+  .actionPanel
+    padding 0.53rem 0.43rem 1.07rem // 20px 16px 40px
+  
+  .actionItem
+    padding 0.37rem 0 // 14px 0
+  
+  .actionIcon
+    width 0.75rem // 28px
+    height 0.75rem // 28px
+    margin-right 0.37rem // 14px
+  
+  .actionText
+    font-size 0.48rem // 18px
+
+// 超小屏幕适配
+@media (max-width: 280px)
+  .avatarContainer
+    padding 0.43rem 0.27rem 4.27rem // 16px 10px 160px
+  
+  .avatar
+    width 2.67rem // 100px
+    height 2.67rem // 100px
+  
+  .defaultAvatar
+    font-size 0.48rem // 18px
+  
+  .actionPanel
+    padding 0.43rem 0.32rem 0.85rem // 16px 12px 32px
+  
+  .actionItem
+    padding 0.32rem 0 // 12px 0
+  
+  .actionIcon
+    width 0.64rem // 24px
+    height 0.64rem // 24px
+    margin-right 0.27rem // 10px
+  
+  .actionText
+    font-size 0.43rem // 16px

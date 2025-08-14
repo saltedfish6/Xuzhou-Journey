@@ -1,0 +1,77 @@
+.gradientButton
+  border: none
+  border-radius: var(--border-radius)
+  cursor: pointer
+  font-weight: 600
+  transition: all 0.3s ease
+  position: relative
+  overflow: hidden
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  text-decoration: none
+  outline: none
+  
+  &:hover:not(.disabled)
+    transform: translateY(-2px)
+    box-shadow: var(--shadow-medium)
+  
+  &:active:not(.disabled)
+    transform: translateY(0)
+  
+  &.disabled
+    opacity: 0.6
+    cursor: not-allowed
+    transform: none !important
+
+// 尺寸变体
+.small
+  padding: 8px 16px
+  font-size: 14px
+  min-height: 32px
+
+.medium
+  padding: 12px 24px
+  font-size: 16px
+  min-height: 40px
+
+.large
+  padding: 16px 32px
+  font-size: 18px
+  min-height: 48px
+
+// 颜色变体
+.primary
+  background: var(--gradient-primary)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-primary-hover)
+
+.secondary
+  background: var(--gradient-secondary)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-secondary-hover)
+
+.success
+  background: var(--gradient-success)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-success-hover)
+
+.warm
+  background: var(--gradient-warm)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-warm-hover)
+
+.cool
+  background: var(--gradient-cool)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-cool-hover)

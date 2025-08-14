@@ -1,0 +1,70 @@
+.gradientButton {
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  outline: none;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+  }
+  
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: var(--shadow-light) !important;
+  }
+}
+
+// 变体样式
+.primary {
+  background: var(--gradient-primary);
+}
+
+.secondary {
+  background: var(--gradient-secondary);
+}
+
+.success {
+  background: var(--gradient-success);
+}
+
+.warm {
+  background: var(--gradient-warm);
+}
+
+.cool {
+  background: var(--gradient-cool);
+}
+
+// 尺寸样式
+.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: var(--radius-small);
+}
+
+.medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  border-radius: var(--radius-large);
+}

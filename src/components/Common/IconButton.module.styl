@@ -1,0 +1,73 @@
+.iconButton
+  border: none
+  border-radius: var(--border-radius)
+  cursor: pointer
+  transition: all 0.3s ease
+  position: relative
+  overflow: hidden
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  outline: none
+  
+  &:hover:not(.disabled)
+    transform: translateY(-2px)
+    box-shadow: var(--shadow-medium)
+  
+  &:active:not(.disabled)
+    transform: translateY(0)
+  
+  &.disabled
+    opacity: 0.6
+    cursor: not-allowed
+    transform: none !important
+
+// 尺寸变体
+.small
+  width: 32px
+  height: 32px
+  font-size: 14px
+
+.medium
+  width: 40px
+  height: 40px
+  font-size: 16px
+
+.large
+  width: 48px
+  height: 48px
+  font-size: 18px
+
+// 颜色变体
+.primary
+  background: var(--gradient-primary)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-primary-hover)
+
+.secondary
+  background: var(--gradient-secondary)
+  color: white
+  
+  &:hover:not(.disabled)
+    background: var(--gradient-secondary-hover)
+
+.ghost
+  background: transparent
+  color: var(--text-primary)
+  border: 1px solid var(--border-color)
+  
+  &:hover:not(.disabled)
+    background: var(--bg-secondary)
+    border-color: var(--primary-color)
+
+.glass
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  color: var(--text-primary)
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  
+  &:hover:not(.disabled)
+    background: rgba(255, 255, 255, 0.2)
+    border-color: rgba(255, 255, 255, 0.3)

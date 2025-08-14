@@ -1,0 +1,123 @@
+.button
+  display inline-flex
+  align-items center
+  justify-content center
+  gap 8px
+  border none
+  border-radius 8px
+  font-size 14px
+  font-weight 500
+  line-height 1.4
+  cursor pointer
+  transition all 0.2s ease
+  outline none
+  user-select none
+  text-decoration none
+  
+  &:focus-visible
+    box-shadow 0 0 0 2px rgba(24, 144, 255, 0.2)
+  
+  &:active
+    transform translateY(1px)
+
+// 类型样式
+.primary
+  background-color #1890ff
+  color #ffffff
+  
+  &:hover:not(.disabled):not(.loading)
+    background-color #40a9ff
+  
+  &:active:not(.disabled):not(.loading)
+    background-color #096dd9
+
+.secondary
+  background-color #f5f5f5
+  color #333333
+  
+  &:hover:not(.disabled):not(.loading)
+    background-color #e6e6e6
+  
+  &:active:not(.disabled):not(.loading)
+    background-color #d9d9d9
+
+.danger
+  background-color #ff4d4f
+  color #ffffff
+  
+  &:hover:not(.disabled):not(.loading)
+    background-color #ff7875
+  
+  &:active:not(.disabled):not(.loading)
+    background-color #d9363e
+
+.ghost
+  background-color transparent
+  color #1890ff
+  border 1px solid #1890ff
+  
+  &:hover:not(.disabled):not(.loading)
+    background-color rgba(24, 144, 255, 0.1)
+  
+  &:active:not(.disabled):not(.loading)
+    background-color rgba(24, 144, 255, 0.2)
+
+// 尺寸样式
+.small
+  padding 6px 12px
+  font-size 12px
+  min-height 28px
+
+.medium
+  padding 8px 16px
+  font-size 14px
+  min-height 36px
+
+.large
+  padding 12px 20px
+  font-size 16px
+  min-height 44px
+
+// 状态样式
+.disabled
+  opacity 0.6
+  cursor not-allowed
+  
+  &:hover, &:active
+    transform none
+
+.loading
+  cursor not-allowed
+  
+  .content
+    opacity 0.7
+
+.block
+  width 100%
+  display flex
+
+// 图标样式
+.icon
+  display flex
+  align-items center
+  font-size 1.2em
+
+.loadingIcon
+  animation spin 1s linear infinite
+
+@keyframes spin
+  from
+    transform rotate(0deg)
+  to
+    transform rotate(360deg)
+
+// 移动端适配
+@media (max-width: 768px)
+  .button
+    min-height 44px // 确保触摸友好
+    
+  .small
+    min-height 36px
+    
+  .large
+    min-height 52px
