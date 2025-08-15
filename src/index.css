@@ -1,3 +1,49 @@
+/* CSS 变量定义 */
+:root {
+  /* 渐变背景 */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-secondary-hover: linear-gradient(135deg, #e081e9 0%, #e3455a 100%);
+  --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-success-hover: linear-gradient(135deg, #3d9aec 0%, #00e0ec 100%);
+  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --gradient-warm-hover: linear-gradient(135deg, #e85e88 0%, #ecd02e 100%);
+  --gradient-cool: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --gradient-cool-hover: linear-gradient(135deg, #96dbd8 0%, #ecc4d1 100%);
+
+  /* 基础颜色 */
+  --primary-color: #667eea;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --bg-primary: #fff;
+  --bg-secondary: #f5f5f5;
+  --border-color: #e0e0e0;
+  --border-radius: 8px;
+
+  /* 阴影效果 */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-colored: 0 4px 20px rgba(102, 126, 234, 0.3);
+
+  /* 圆角 */
+  --radius-small: 0.5rem;
+  --radius-medium: 1rem;
+  --radius-large: 1.5rem;
+  --radius-xl: 2rem;
+
+  /* 毛玻璃效果 */
+  --blur-light: blur(10px);
+  --blur-medium: blur(20px);
+  --blur-heavy: blur(30px);
+
+  /* 过渡动画 */
+  --transition-fast: all 0.2s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -87,4 +133,109 @@ select,
 textarea {
   word-wrap: break-word;
   word-break: break-all;
+}
+
+/* 通用样式类 */
+.gradient-bg {
+  background: var(--gradient-primary);
+}
+
+.gradient-bg-secondary {
+  background: var(--gradient-secondary);
+}
+
+.gradient-bg-success {
+  background: var(--gradient-success);
+}
+
+.gradient-bg-warm {
+  background: var(--gradient-warm);
+}
+
+.gradient-bg-cool {
+  background: var(--gradient-cool);
+}
+
+.glass-effect {
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-effect-light {
+  backdrop-filter: var(--blur-light);
+  -webkit-backdrop-filter: var(--blur-light);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.shadow-light {
+  box-shadow: var(--shadow-light);
+}
+
+.shadow-medium {
+  box-shadow: var(--shadow-medium);
+}
+
+.shadow-heavy {
+  box-shadow: var(--shadow-heavy);
+}
+
+.shadow-colored {
+  box-shadow: var(--shadow-colored);
+}
+
+.shadow {
+  box-shadow: var(--shadow-medium);
+}
+
+.radius-small {
+  border-radius: var(--radius-small);
+}
+
+.radius-medium {
+  border-radius: var(--radius-medium);
+}
+
+.radius-large {
+  border-radius: var(--radius-large);
+}
+
+.radius-xl {
+  border-radius: var(--radius-xl);
+}
+
+.transition-fast {
+  transition: var(--transition-fast);
+}
+
+.transition-normal {
+  transition: var(--transition-normal);
+}
+
+.transition-slow {
+  transition: var(--transition-slow);
+}
+
+/* 通用滚动条样式 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }

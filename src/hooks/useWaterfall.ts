@@ -174,6 +174,7 @@ export function useWaterfall(
 
   // 用于跟踪初始项目的引用
   const prevItemsRef = useRef<string>('')
+  const isInitializedRef = useRef(false)
 
   // 初始化时处理初始数据
   useEffect(() => {
@@ -181,12 +182,58 @@ export function useWaterfall(
       // 使用一个标记来防止无限循环
       const itemsJSON = JSON.stringify(initialItems.map((item) => item.id))
 
-      if (prevItemsRef.current !== itemsJSON) {
+      if (prevItemsRef.current !== itemsJSON && !isInitializedRef.current) {
         prevItemsRef.current = itemsJSON
-        resetItems(initialItems)
+        isInitializedRef.current = true
+
+        // 直接处理初始数据，避免依赖 resetItems
+        setLoading(true)
+        setColumns(
+          Array.from({ length: columnCount }, () => ({ items: [], height: 0 }))
+        )
+        setAllItems(initialItems)
+        setHasMore(true)
+
+        // 异步处理列布局
+        const processInitialItems = async () => {
+          const newColumns: WaterfallColumn[] = Array.from(
+            { length: columnCount },
+            () => ({
+              items: [],
+              height: 0
+            })
+          )
+
+          for (const item of initialItems) {
+            const height = await getImageHeight(item)
+            const minHeightColumnIndex = newColumns.reduce(
+              (minIndex, column, index) =>
+                column.height < newColumns[minIndex].height ? index : minIndex,
+              0
+            )
+
+            const itemWithHeight: WaterfallItem = { ...item, height }
+            newColumns[minHeightColumnIndex].items.push(itemWithHeight)
+            newColumns[minHeightColumnIndex].height += height + 10
+          }
+
+          setColumns(newColumns)
+          setLoading(false)
+        }
+
+        processInitialItems()
       }
+    } else if (initialItems.length === 0 && isInitializedRef.current) {
+      // 重置状态
+      prevItemsRef.current = ''
+      isInitializedRef.current = false
+      setColumns(
+        Array.from({ length: columnCount }, () => ({ items: [], height: 0 }))
+      )
+      setAllItems([])
+      setHasMore(true)
     }
-  }, [initialItems, resetItems]) // 添加完整的 initialItems 作为依赖
+  }, [initialItems, columnCount, getImageHeight])
 
   return {
     columns,
