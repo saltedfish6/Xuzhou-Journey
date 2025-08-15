@@ -1,0 +1,4 @@
+:root {
+  /* 覆盖 React Vant 的 cell-group-title 颜色变量 */
+  --rv-cell-group-title-color: #ffffff !important;
+}

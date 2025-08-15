@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { PullRefresh } from 'react-vant'
 import { useTitle } from '@/hooks/useTitle'
 import Waterfall from '@/components/Waterfall'
 import { preloadImages } from '@/utils/imageOptimizer'
@@ -14,7 +15,7 @@ interface WaterfallItemData {
   [key: string]: string | number | undefined
 }
 
-// 数据缓存 - 清空缓存以使用新的图片URL
+// 数据缓存 - 已清空缓存以使用新的图片URL
 const dataCache: Record<
   string,
   {
@@ -26,29 +27,43 @@ const dataCache: Record<
   }
 > = {}
 
+// 清空所有缓存，确保使用新的图片URL
+Object.keys(dataCache).forEach((key) => {
+  delete dataCache[key]
+})
+
 // API 请求函数
 const fetchWaterfallData = async (
   page: number,
   tab: string,
-  pageSize: number = 20
+  pageSize: number = 20,
+  forceRefresh: boolean = false
 ) => {
   // 缓存键
   const cacheKey = `${tab}-${page}-${pageSize}`
 
-  // 如果有缓存，直接返回缓存数据
-  if (dataCache[cacheKey]) {
-    console.log('使用缓存数据:', cacheKey)
+  // 如果有缓存且不是强制刷新，直接返回缓存数据
+  if (dataCache[cacheKey] && !forceRefresh) {
+    // console.log('使用缓存数据:', cacheKey)
     return dataCache[cacheKey]
   }
 
   try {
+    // 如果是强制刷新或者是第一页，添加时间戳参数确保获取新数据
+    const timestamp = forceRefresh || page === 1 ? Date.now() : ''
+    const timestampParam = timestamp ? `&timestamp=${timestamp}` : ''
     const response = await fetch(
-      `/api/home/waterfall?page=${page}&tab=${encodeURIComponent(tab)}&pageSize=${pageSize}`
+      `/api/home/waterfall?page=${page}&tab=${encodeURIComponent(tab)}&pageSize=${pageSize}${timestampParam}`
     )
     const result = await response.json()
 
     if (result.code === 0) {
-      // 缓存结果
+      // 缓存结果，但限制缓存数量避免内存泄漏
+      const cacheKeys = Object.keys(dataCache)
+      if (cacheKeys.length > 50) {
+        // 删除最旧的缓存
+        delete dataCache[cacheKeys[0]]
+      }
       dataCache[cacheKey] = result.data
       return result.data
     } else {
@@ -60,15 +75,6 @@ const fetchWaterfallData = async (
   }
 }
 
-// 预加载下一页数据
-const preloadNextPage = (tab: string, page: number) => {
-  if (page > 1) {
-    fetchWaterfallData(page, tab, 20).catch(() => {
-      // 预加载失败不处理
-    })
-  }
-}
-
 const Home: React.FC = () => {
   useTitle('发现 - 旅行助手')
 
@@ -76,73 +82,75 @@ const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState('推荐')
   const [items, setItems] = useState<WaterfallItemData[]>([])
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(0)
-
   const tabs = ['推荐', '热门', '最新', '附近']
+  const refreshTimeoutRef = useRef<NodeJS.Timeout>()
 
-  const loadInitialData = useCallback(async () => {
-    setLoading(true)
-    try {
-      const result = await fetchWaterfallData(1, activeTab, 20)
-      setItems(result.items)
-      setPage(2)
-      setHasMore(result.hasMore)
+  const loadInitialData = useCallback(
+    async (tab: string, isRefresh = false) => {
+      if (isRefresh) {
+        setRefreshing(true)
+      } else {
+        setLoading(true)
+      }
+      try {
+        const result = await fetchWaterfallData(1, tab, 15, isRefresh) // 传递刷新标志
+        setItems(result.items)
+        setPage(2)
+        setHasMore(result.hasMore)
 
-      // 预加载图片
-      if (result.items.length > 0) {
-        const imageUrls = result.items.map(
-          (item: WaterfallItemData) => item.imageUrl
-        )
-        preloadImages(imageUrls.slice(0, 8), true) // 高优先级预加载前8张
-
-        if (imageUrls.length > 8) {
-          preloadImages(imageUrls.slice(8), false) // 低优先级预加载剩余图片
+        // 预加载图片 - 只预加载第一张，最小化性能影响
+        if (result.items.length > 0) {
+          const imageUrls = result.items.map(
+            (item: WaterfallItemData) => item.imageUrl
+          )
+          preloadImages(imageUrls.slice(0, 1), true) // 只预加载第一张
+        }
+      } catch (error) {
+        console.error('加载数据失败', error)
+      } finally {
+        if (isRefresh) {
+          setRefreshing(false)
+        } else {
+          setLoading(false)
         }
       }
-
-      // 预加载下一页数据
-      preloadNextPage(activeTab, 2)
-    } catch (error) {
-      console.error('加载数据失败', error)
-    } finally {
-      setLoading(false)
-    }
-  }, [activeTab])
+    },
+    []
+  )
 
   // 初始化数据
   useEffect(() => {
-    loadInitialData()
-  }, [loadInitialData])
+    loadInitialData(activeTab)
+  }, [activeTab, loadInitialData])
 
   const loadMoreData = async () => {
-    if (loading || !hasMore) return
+    if (loading || refreshing || !hasMore) {
+      return
+    }
 
     setLoading(true)
+    const nextPage = page + 1 // 先计算下一页
     try {
-      const result = await fetchWaterfallData(page, activeTab, 20)
+      const result = await fetchWaterfallData(nextPage, activeTab, 15, false) // 传递下一页页码
 
-      if (result.items.length === 0) {
-        setHasMore(false)
-        return
-      }
-
-      setItems((prev) => [...prev, ...result.items])
-      const nextPage = page + 1
-      setPage(nextPage)
+      // 更新hasMore状态，即使没有数据也要根据API返回的hasMore字段
       setHasMore(result.hasMore)
 
-      // 预加载新加载项的图片
+      if (result.items.length > 0) {
+        setItems((prev) => [...prev, ...result.items])
+      }
+
+      setPage(nextPage) // 更新页码
+
+      // 预加载新加载项的图片 - 只预加载前2张，进一步减少预加载
       if (result.items.length > 0) {
         const imageUrls = result.items.map(
           (item: WaterfallItemData) => item.imageUrl
         )
-        preloadImages(imageUrls, false)
-      }
-
-      // 预加载下一页数据
-      if (result.hasMore) {
-        preloadNextPage(activeTab, nextPage)
+        preloadImages(imageUrls.slice(0, 2), false)
       }
     } catch (error) {
       console.error('加载更多失败', error)
@@ -162,23 +170,55 @@ const Home: React.FC = () => {
     navigate(`/detail/${item.id}`)
   }
 
-  const handleSearchClick = () => {
+  const handleGoToSearch = () => {
     navigate('/search')
   }
+
+  // 下拉刷新处理
+  const handleRefresh = useCallback(async () => {
+    // 清除之前的定时器
+    if (refreshTimeoutRef.current) {
+      clearTimeout(refreshTimeoutRef.current)
+    }
+
+    // 清空当前标签的所有缓存，确保获取新数据
+    Object.keys(dataCache).forEach((key) => {
+      if (key.startsWith(activeTab)) {
+        delete dataCache[key]
+      }
+    })
+
+    // 重置状态
+    setItems([])
+    setPage(1) // 重置为1，因为loadInitialData会设置为2
+    setHasMore(true)
+
+    // 加载新数据，传入刷新标志
+    await loadInitialData(activeTab, true)
+  }, [activeTab, loadInitialData])
 
   const handleTabChange = (tab: string) => {
     if (tab === activeTab) return
 
     setActiveTab(tab)
     setItems([])
-    setPage(0)
+    setPage(1) // 重置为1，保持与loadInitialData一致
     setHasMore(true)
   }
+
+  // 清理定时器
+  useEffect(() => {
+    return () => {
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current)
+      }
+    }
+  }, [])
   return (
     <div className={styles.home}>
       {/* 顶部搜索栏 */}
       <div className={styles.header}>
-        <div className={styles.searchBar} onClick={handleSearchClick}>
+        <div className={styles.searchBar} onClick={handleGoToSearch}>
           <svg
             className={styles.searchIcon}
             viewBox="0 0 24 24"
@@ -219,17 +259,27 @@ const Home: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className={styles.waterfallContainer}>
-            <Waterfall
-              items={items}
-              loading={loading}
-              hasMore={hasMore}
-              onLoadMore={loadMoreData}
-              onItemClick={handleItemClick}
-              columnCount={2}
-              gap={8}
-            />
-          </div>
+          <PullRefresh
+            v-model:refresh={refreshing}
+            onRefresh={handleRefresh}
+            pullingText="下拉刷新"
+            loosingText="释放刷新"
+            loadingText="刷新中..."
+            successText="刷新成功"
+            successDuration={1000}
+          >
+            <div className={styles.waterfallContainer}>
+              <Waterfall
+                items={items}
+                loading={loading}
+                hasMore={hasMore}
+                onLoadMore={loadMoreData}
+                onItemClick={handleItemClick}
+                columnCount={2}
+                gap={8}
+              />
+            </div>
+          </PullRefresh>
         )}
       </div>
     </div>

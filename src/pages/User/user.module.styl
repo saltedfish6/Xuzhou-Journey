@@ -1,0 +1,914 @@
+// 个人中心页面样式 - 统一风格设计
+.container
+  height 100%
+  background #f8f9fa
+  padding 0
+  position relative
+  overflow-y auto
+  display flex
+  flex-direction column
+  scroll-behavior smooth
+  
+  composes: custom-scrollbar from '../../index.css'
+
+// 用户信息区域 - 优化高度和间距，适配不同屏幕
+.userSection
+  composes: gradient-bg from '../../index.css'
+  padding 0.16rem 0.21rem 0.27rem // 12px 16px 20px - 减少内边距
+  position relative
+  color white
+  min-height 58vh
+  max-height none
+  overflow visible
+  display flex
+  flex-direction column
+  composes: transition-normal from '../../index.css'
+  flex-shrink 0
+  composes: shadow-medium from '../../index.css'
+  
+  &.scrolled
+    transform translateY(-58vh)
+
+// 顶部操作栏
+.topBar
+  display flex
+  justify-content space-between
+  align-items center
+  padding 8px 0
+  
+.menuIcon
+  color rgba(255, 255, 255, 0.9)
+  font-size 24px
+  cursor pointer
+
+.topActions
+  display flex
+  gap 0.4rem // 15px
+  align-items center
+
+.shareIcon, .moreIcon
+  color rgba(255, 255, 255, 0.9)
+  font-size 0.64rem // 24px
+  cursor pointer
+
+// 个人资料区域 - 进一步优化间距，适配不同屏幕
+.profileSection
+  display flex
+  flex-direction column
+  align-items center
+  margin-bottom 0.13rem // 10px - 进一步减少间距
+  flex-shrink 0
+  position relative
+  padding 0 0.16rem // 12px - 减少左右内边距
+
+.avatarContainer
+  position relative
+  margin-bottom 0.11rem // 8px - 进一步减少间距
+
+.avatar
+  width 1.6rem // 120px
+  height 1.6rem // 120px
+  border-radius 50%
+  border 0.05rem solid rgba(255, 255, 255, 0.9) // 4px
+  display flex
+  align-items center
+  justify-content center
+  background rgba(255, 255, 255, 0.2)
+  overflow hidden
+  cursor pointer
+  box-shadow 0 0.11rem 0.32rem rgba(0, 0, 0, 0.2) // 0 8px 24px
+  transition all 0.3s ease
+  
+  &:hover
+    transform scale(1.05)
+    box-shadow 0 0.16rem 0.43rem rgba(0, 0, 0, 0.25) // 0 12px 32px
+  
+  img
+    width 100%
+    height 100%
+    object-fit cover
+  
+  .avatarText
+    color white
+    font-size 0.64rem // 48px
+    font-weight 600
+
+.addIcon
+  position absolute
+  bottom 0.05rem // 4px
+  right 0.05rem // 4px
+  width 0.43rem // 32px
+  height 0.43rem // 32px
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border 0.04rem solid white // 3px
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  color white
+  font-size 0.24rem // 18px
+  font-weight bold
+  cursor pointer
+  box-shadow 0 0.05rem 0.16rem rgba(0, 0, 0, 0.25) // 0 4px 12px
+
+.userDetails
+  color white
+  min-height 0
+  width 100%
+  text-align center
+
+.nickname
+  font-size 0.64rem // 48px - 更大字体
+  font-weight 700
+  margin 0 0 0.08rem 0 // 6px - 进一步减少间距
+  color white
+  text-shadow 0 0.03rem 0.05rem rgba(0, 0, 0, 0.1)
+  text-align center
+
+// 用户信息区域 - 居中布局，ID和地点并列在头像下方
+.userInfoRow
+  display flex
+  justify-content center
+  align-items center
+  width 100%
+  margin-bottom 0.11rem // 8px - 进一步减少间距
+  gap 0.16rem // 12px - 进一步减少间距
+
+.userId
+  font-size 0.32rem // 24px - 更大字体
+  color rgba(255, 255, 255, 0.8)
+  text-align center
+
+.location
+  display flex
+  align-items center
+  gap 0.08rem // 6px
+  font-size 0.32rem // 24px - 更大字体
+  color rgba(255, 255, 255, 0.8)
+
+.bio
+  font-size 0.35rem // 26px - 更大字体
+  color rgba(255, 255, 255, 0.9)
+  margin-bottom 0.11rem // 8px - 进一步减少间距
+  line-height 1.5
+  text-align center
+  max-width 100%
+  padding 0 0.21rem // 16px
+
+// 统计数据
+.statsRow
+  display flex
+  justify-content center
+  gap 0.43rem // 32px - 进一步减少间距
+  margin-bottom 0.11rem // 8px - 进一步减少间距
+
+.statItem
+  text-align center
+  
+.statNumber
+  font-size 0.37rem // 28px - 增大字体
+  font-weight 700
+  color white
+  margin-bottom 0.08rem // 6px
+  text-shadow 0 0.01rem 0.03rem rgba(0, 0, 0, 0.1) // 1px 2px
+
+.statLabel
+  font-size 0.24rem // 18px - 增大字体
+  color rgba(255, 255, 255, 0.8)
+
+// 操作按钮区域 - 水平布局，减少间距
+.actionsSection
+  display flex
+  gap 0.16rem // 12px - 进一步减少间距
+  justify-content center
+  margin-bottom 0.13rem // 10px - 进一步减少间距
+  width 100%
+
+// 操作按钮
+.actionButtons
+  display flex
+  justify-content center
+  gap 16px
+
+// 未登录状态
+.loginPrompt
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  text-align center
+  padding 40px 20px
+  position relative
+  flex 1
+  height 100%
+
+.defaultAvatar
+  width 120px
+  height 120px
+  border-radius 50%
+  background rgba(255, 255, 255, 0.2)
+  color white
+  margin-bottom 32px
+  display flex
+  align-items center
+  justify-content center
+  font-size 48px
+  border 3px solid rgba(255, 255, 255, 0.4)
+  box-shadow 0 8px 24px rgba(0, 0, 0, 0.2)
+
+.loginText
+  margin-bottom 32px
+
+.loginText h2
+  color white
+  font-size 24px
+  font-weight 600
+  margin 0 0 8px 0
+  text-shadow 0 2px 4px rgba(0, 0, 0, 0.1)
+
+.loginText p
+  color rgba(255, 255, 255, 0.8)
+  font-size 16px
+  margin 0
+
+.loginBtn
+  background white
+  border none
+  color #333
+  border-radius 16px
+  padding 12px 32px
+  font-size 16px
+  font-weight 600
+  transition all 0.3s ease
+  cursor pointer
+  box-shadow 0 4px 12px rgba(0, 0, 0, 0.1)
+  
+  &:hover
+    background #f8f9fa
+    transform translateY(-2px)
+    box-shadow 0 6px 16px rgba(0, 0, 0, 0.15)
+  
+  &:active
+    transform translateY(0)
+    box-shadow 0 2px 8px rgba(0, 0, 0, 0.1)
+
+// 功能卡片区域 - 进一步优化间距，更紧凑
+.featureCards
+  padding 0.08rem 0.16rem 0.08rem // 6px 12px 6px - 减少内边距
+  display flex
+  justify-content space-between
+  gap 0.08rem // 6px - 进一步减少间距
+  margin-top 0.05rem // 4px - 减少顶部间距
+  flex-shrink 0
+  width 100%
+  box-sizing border-box
+  
+  &:first-child
+    margin-top 0.08rem // 6px - 减少第一行间距
+  
+  &:last-child
+    margin-bottom 0.08rem // 6px - 减少最后一行间距
+
+.featureCard
+  background rgba(255, 255, 255, 0.15)
+  border-radius 0.16rem // 12px - 进一步减少圆角
+  padding 0.13rem 0.08rem // 10px 6px - 进一步减少内边距
+  display flex
+  flex-direction column
+  align-items center
+  text-align center
+  cursor pointer
+  transition all 0.3s ease
+  backdrop-filter blur(0.16rem) // 12px
+  border 0.01rem solid rgba(255, 255, 255, 0.2) // 1px
+  box-shadow 0 0.08rem 0.21rem rgba(0, 0, 0, 0.12) // 0 6px 16px
+  flex 1
+  min-width 0
+  min-height 1.07rem // 80px - 进一步减少最小高度
+  
+  &:hover
+    background rgba(255, 255, 255, 0.25)
+    transform translateY(-0.08rem) // -6px
+    box-shadow 0 0.16rem 0.37rem rgba(0, 0, 0, 0.18) // 0 12px 28px
+  
+  &:active
+    transform translateY(-0.04rem) // -3px
+    box-shadow 0 0.08rem 0.21rem rgba(0, 0, 0, 0.12) // 0 6px 16px
+
+.cardIcon
+  font-size 0.29rem // 22px - 进一步减少图标大小
+  margin-bottom 0.05rem // 4px - 进一步减少间距
+  color white
+  text-shadow 0 0.03rem 0.08rem rgba(0, 0, 0, 0.15) // 0 2px 6px
+
+.cardTitle
+  font-size 0.27rem // 20px - 进一步减少字体
+  font-weight 600
+  color white
+  margin-bottom 0.03rem // 2px - 进一步减少间距
+  text-shadow 0 0.01rem 0.03rem rgba(0, 0, 0, 0.1) // 0 1px 2px
+
+.cardDesc
+  font-size 0.21rem // 16px - 进一步减少字体
+  color rgba(255, 255, 255, 0.8)
+  margin-bottom 0.05rem // 4px - 进一步减少间距
+  text-align center
+  line-height 1.1
+
+.cardBadge
+  font-size 0.19rem // 14px - 进一步减少字体
+  color rgba(255, 255, 255, 0.9)
+  background rgba(255, 255, 255, 0.2)
+  padding 0.03rem 0.08rem // 2px 6px - 进一步减少内边距
+  border-radius 0.08rem // 6px - 进一步减少圆角
+  backdrop-filter blur(0.08rem) // 6px
+  text-align center
+
+// 顶部导航栏 - 滚动时显示
+.topNavBar
+  position fixed
+  top 0
+  left 0
+  right 0
+  height 44px
+  background rgba(255, 255, 255, 0.95)
+  backdrop-filter blur(20px)
+  display flex
+  align-items center
+  justify-content center
+  z-index 1000
+  transform translateY(-100%)
+  transition all 0.3s ease
+  border-bottom 1px solid rgba(0, 0, 0, 0.05)
+  box-shadow 0 2px 12px rgba(0, 0, 0, 0.05)
+  
+  &.visible
+    transform translateY(0)
+
+.topNavAvatar
+  width 30px
+  height 30px
+  border-radius 50%
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  display flex
+  align-items center
+  justify-content center
+  color white
+  font-size 14px
+  font-weight 600
+  border 2px solid rgba(102, 126, 234, 0.2)
+  box-shadow 0 2px 8px rgba(0, 0, 0, 0.1)
+  
+  img
+    width 100%
+    height 100%
+    object-fit cover
+    border-radius 50%
+
+.topNavTitle
+  position absolute
+  left 50%
+  transform translateX(-50%)
+  font-size 16px
+  font-weight 600
+  color #333
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  -webkit-background-clip text
+  -webkit-text-fill-color transparent
+
+// 底部内容区域
+.contentSection
+  background rgba(255, 255, 255, 0.95)
+  flex 1
+  overflow visible
+  border-radius 20px 20px 0 0
+  margin-top -20px
+  position relative
+  z-index 10
+  padding-bottom 100px // 为底部导航栏和退出按钮留出空间
+  backdrop-filter blur(10px)
+  box-shadow 0 -4px 20px rgba(0, 0, 0, 0.1)
+
+// 标签页 - 居中布局
+.tabBar
+  display flex
+  align-items center
+  justify-content center
+  padding 18px 20px 12px
+  border-bottom 1px solid rgba(0, 0, 0, 0.05)
+  background rgba(255, 255, 255, 0.95)
+  backdrop-filter blur(20px)
+  position relative
+  z-index 10
+  box-shadow 0 2px 8px rgba(0, 0, 0, 0.03)
+
+.tabItem
+  display flex
+  align-items center
+  gap 8px
+  margin 0 20px
+  cursor pointer
+  transition all 0.3s ease
+  padding 10px 16px
+  border-radius 20px
+  
+  &:hover
+    background rgba(102, 126, 234, 0.05)
+    color #667eea
+  
+  &.active
+    background rgba(102, 126, 234, 0.1)
+    
+    .tabText
+      color #667eea
+      font-weight 600
+      position relative
+      
+      &::after
+        content ''
+        position absolute
+        bottom -12px
+        left 50%
+        transform translateX(-50%)
+        width 24px
+        height 3px
+        background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+        border-radius 1.5px
+        box-shadow 0 1px 4px rgba(102, 126, 234, 0.3)
+
+.tabIcon
+  font-size 20px
+
+.tabText
+  font-size 0.32rem // 24px - 增大字体
+  color #666
+  transition all 0.3s ease
+  font-weight 500
+
+.searchIcon
+  position absolute
+  right 20px
+  font-size 20px
+  color #666
+  cursor pointer
+  padding 10px
+  border-radius 50%
+  transition all 0.3s ease
+  
+  &:hover
+    background rgba(102, 126, 234, 0.1)
+    color #667eea
+
+// 内容统计 - 居中布局，增大字体
+.contentStats
+  padding 0.21rem 0.27rem // 16px 20px
+  display flex
+  justify-content center
+  gap 0.43rem // 32px
+  background rgba(248, 249, 250, 0.8)
+  backdrop-filter blur(0.13rem) // 10px
+
+.statsText
+  font-size 0.35rem // 26px - 显著增大字体
+  color #666
+  font-weight 600
+  text-shadow 0 0.01rem 0.03rem rgba(0, 0, 0, 0.1) // 增加文字阴影提升可读性
+
+// 内容网格
+.contentGrid
+  padding 0.27rem 0.53rem 0.53rem // 10px 20px 20px
+  display grid
+  grid-template-columns 1fr 1fr
+  gap 0.27rem // 10px
+
+.contentItem
+  cursor pointer
+  transition transform 0.2s ease
+  
+  &:hover
+    transform translateY(-0.05rem) // -2px
+    
+    .contentImage
+      box-shadow 0 0.21rem 0.64rem rgba(0, 0, 0, 0.15) // 0 8px 24px
+
+.contentImage
+  position relative
+  aspect-ratio 3/4
+  border-radius 0.21rem // 8px
+  overflow hidden
+  margin-bottom 0.21rem // 8px
+  box-shadow 0 0.11rem 0.32rem rgba(0, 0, 0, 0.1) // 0 4px 12px
+  transition box-shadow 0.2s ease
+
+.placeholderImage
+  width 100%
+  height 100%
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  display flex
+  align-items center
+  justify-content center
+  font-size 0.8rem // 30px
+  color white
+  position relative
+
+.playIcon
+  position absolute
+  bottom 0.21rem // 8px
+  right 0.21rem // 8px
+  width 0.64rem // 24px
+  height 0.64rem // 24px
+  background rgba(0, 0, 0, 0.6)
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  color white
+  font-size 0.32rem // 12px
+  backdrop-filter blur(4px)
+
+.contentTitle
+  font-size 0.24rem // 18px - 增大字体
+  color #333
+  margin-bottom 0.13rem // 5px
+  line-height 1.3
+  font-weight 500
+
+.contentMeta
+  display flex
+  justify-content space-between
+  align-items center
+
+.authorName
+  font-size 0.21rem // 16px - 增大字体
+  color #999
+
+.likeCount
+  font-size 0.27rem // 20px - 增大字体
+  color #999
+  display flex
+  align-items center
+  gap 0.08rem // 3px
+
+// 退出登录区域
+.logoutSection
+  padding 0.53rem // 20px
+  border-top 1px solid #f0f0f0
+  background white
+
+.logoutBtn
+  background #ff6b6b
+  border 1px solid #ff6b6b
+  color white
+  border-radius 0.64rem // 24px
+  height 1.47rem // 55px - 增加高度
+  font-weight 500
+  font-size 0.27rem // 20px - 增大字体
+  
+  &:hover
+    background #ff5252
+    border-color #ff5252
+
+// 登录弹窗样式 - 现代化设计
+.loginPopup
+  .rv-popup__content
+    background rgba(255, 255, 255, 0.95)
+    backdrop-filter blur(20px)
+    border-radius 0.64rem // 24px
+    max-width 12.8rem // 480px
+    width 95vw
+    box-shadow 0 0.53rem 2.13rem rgba(0, 0, 0, 0.12), 0 0.13rem 0.53rem rgba(0, 0, 0, 0.08)
+    border 1px solid rgba(255, 255, 255, 0.2)
+    overflow hidden
+
+.loginContainer
+  background transparent
+  position relative
+  overflow hidden
+
+.loginHeader
+  padding 0.96rem 0 0.8rem // 36px 0 30px
+  text-align center
+  position relative
+  background linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%)
+
+.loginTitle
+  font-size 0.75rem // 28px
+  font-weight 700
+  color #1a1a1a
+  margin 0
+  letter-spacing -0.02rem
+  text-shadow 0 0.01rem 0.03rem rgba(0, 0, 0, 0.1)
+
+.closeButton
+  position absolute
+  top 0.64rem // 24px
+  right 0.64rem // 24px
+  width 0.96rem // 36px
+  height 0.96rem // 36px
+  border none
+  background rgba(0, 0, 0, 0.03)
+  color #999
+  font-size 0.53rem // 20px
+  cursor pointer
+  transition all 0.3s ease
+  border-radius 50%
+  display flex
+  align-items center
+  justify-content center
+  backdrop-filter blur(10px)
+  
+  &:hover
+    background rgba(0, 0, 0, 0.08)
+    color #666
+    transform scale(1.05)
+  
+  &:active
+    transform scale(0.95)
+
+.loginForm
+  padding 0 1.33rem 1.2rem // 0 50px 45px
+
+.loginInput
+  margin-bottom 0.48rem // 18px
+  
+  .rv-input__control
+    background rgba(248, 249, 250, 0.8)
+    backdrop-filter blur(10px)
+    border 1px solid rgba(233, 236, 239, 0.6)
+    border-radius 0.43rem // 16px
+    padding 0.53rem 0.64rem // 20px 24px
+    font-size 0.43rem // 16px
+    color #333
+    height 1.47rem // 55px
+    transition all 0.3s ease
+    box-shadow 0 0.05rem 0.21rem rgba(0, 0, 0, 0.03)
+    
+    &::placeholder
+      color #999
+      font-size 0.43rem // 16px
+    
+    &:focus
+      background rgba(255, 255, 255, 0.95)
+      border-color #667eea
+      box-shadow 0 0 0 0.11rem rgba(102, 126, 234, 0.15), 0 0.08rem 0.32rem rgba(102, 126, 234, 0.1)
+      transform translateY(-0.03rem)
+    
+    &:hover
+      background rgba(255, 255, 255, 0.9)
+      border-color rgba(102, 126, 234, 0.3)
+      
+  .rv-input__body
+    background transparent
+
+.loginButton
+  height 1.47rem // 55px
+  border-radius 0.43rem // 16px
+  font-size 0.43rem // 16px
+  font-weight 700
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border none
+  margin 0.64rem 0 0.48rem // 24px 0 18px
+  transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+  box-shadow 0 0.16rem 0.64rem rgba(102, 126, 234, 0.3), 0 0.05rem 0.21rem rgba(102, 126, 234, 0.2)
+  position relative
+  overflow hidden
+  
+  &::before
+    content ''
+    position absolute
+    top 0
+    left -100%
+    width 100%
+    height 100%
+    background linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)
+    transition left 0.5s ease
+  
+  &:hover
+    transform translateY(-0.08rem) // -3px
+    box-shadow 0 0.27rem 1.07rem rgba(102, 126, 234, 0.4), 0 0.08rem 0.32rem rgba(102, 126, 234, 0.3)
+    
+    &::before
+      left 100%
+  
+  &:active
+    transform translateY(-0.03rem)
+    box-shadow 0 0.13rem 0.53rem rgba(102, 126, 234, 0.3)
+
+.demoTips
+  background linear-gradient(135deg, rgba(102, 126, 234, 0.06) 0%, rgba(118, 75, 162, 0.04) 100%)
+  border 1px solid rgba(102, 126, 234, 0.15)
+  border-radius 0.43rem // 16px
+  padding 0.64rem // 24px
+  text-align center
+  backdrop-filter blur(10px)
+  position relative
+  
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%)
+    border-radius inherit
+    pointer-events none
+  
+  p
+    margin 0
+    font-size 0.37rem // 14px
+    color #666
+    line-height 1.5
+    font-weight 500
+    position relative
+    z-index 1
+
+// 编辑资料弹窗
+.editPopup
+  .rv-popup__content
+    background rgba(255, 255, 255, 0.98)
+    backdrop-filter blur(20px)
+    border-radius 0.32rem 0.32rem 0 0 // 12px 12px 0 0
+    max-height 80vh
+    overflow-y auto
+
+.popupHeader
+  padding 0.53rem 0.43rem 0.32rem // 20px 16px 12px
+  text-align center
+  border-bottom 1px solid rgba(0, 0, 0, 0.05)
+  background rgba(248, 249, 250, 0.5)
+  backdrop-filter blur(10px)
+  position sticky
+  top 0
+  z-index 10
+
+.popupHeader h3
+  color #333
+  font-size 0.48rem // 18px
+  font-weight 600
+  margin 0
+  text-shadow 0 0.01rem 0.03rem rgba(0, 0, 0, 0.1)
+
+.editForm
+  padding 0
+  max-height 50vh
+  overflow-y auto
+
+.editForm .rv-cell
+  background transparent
+  border-bottom 1px solid rgba(0, 0, 0, 0.05)
+  padding 0.43rem 0.53rem // 16px 20px
+  transition all 0.2s ease
+  
+  &:hover
+    background rgba(102, 126, 234, 0.03)
+  
+  &:last-child
+    border-bottom none
+  
+  .rv-cell__title
+    font-size 0.43rem // 16px
+    font-weight 500
+    color #333
+    min-width 1.6rem // 60px
+  
+  .rv-field__control
+    font-size 0.37rem // 14px
+    color #666
+
+.editActions
+  padding 0.53rem // 20px
+  background rgba(248, 249, 250, 0.8)
+  backdrop-filter blur(10px)
+  border-top 1px solid rgba(0, 0, 0, 0.05)
+  position sticky
+  bottom 0
+  z-index 10
+
+.editActions .rv-button
+  border-radius 0.32rem // 12px
+  height 1.33rem // 50px
+  font-weight 600
+  font-size 0.43rem // 16px
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border none
+  box-shadow 0 0.11rem 0.32rem rgba(102, 126, 234, 0.3)
+  transition all 0.3s ease
+  
+  &:hover
+    transform translateY(-0.03rem) // -1px
+    box-shadow 0 0.16rem 0.43rem rgba(102, 126, 234, 0.4)
+  
+  &:active
+    transform translateY(0)
+    box-shadow 0 0.08rem 0.21rem rgba(102, 126, 234, 0.3)
+
+// 设置弹窗
+.settingsPopup
+  .rv-popup__content
+    background rgba(255, 255, 255, 0.98)
+    backdrop-filter blur(20px)
+    border-radius 0.32rem 0.32rem 0 0 // 12px 12px 0 0
+
+.settingsList
+  padding 0
+
+.settingsList .rv-cell
+  background transparent
+  border-bottom 1px solid rgba(0, 0, 0, 0.05)
+  padding 0.43rem 0.53rem // 16px 20px
+  transition all 0.2s ease
+  
+  &:hover
+    background rgba(102, 126, 234, 0.05)
+  
+  &:active
+    background rgba(102, 126, 234, 0.1)
+  
+  &:last-child
+    border-bottom none
+  
+  .rv-cell__title
+    font-size 0.43rem // 16px
+    font-weight 500
+    color #333
+  
+  .rv-cell__left-icon
+    margin-right 0.32rem // 12px
+
+// 关于我们弹窗
+.aboutPopup
+  .rv-popup__content
+    background rgba(255, 255, 255, 0.98)
+    backdrop-filter blur(20px)
+
+.aboutContent
+  padding 0.53rem // 20px
+
+.appInfo
+  text-align center
+  margin-bottom 0.64rem // 24px
+  
+  h4
+    color #333
+    font-size 0.48rem // 18px
+    font-weight 600
+    margin 0 0 0.21rem 0 // 0 0 8px 0
+  
+  p
+    color #666
+    font-size 0.37rem // 14px
+    margin 0
+
+.features
+  margin-bottom 0.64rem // 24px
+  
+  h5
+    color #333
+    font-size 0.43rem // 16px
+    font-weight 600
+    margin 0 0 0.32rem 0 // 0 0 12px 0
+  
+  ul
+    margin 0
+    padding-left 0
+    list-style none
+  
+  li
+    color #666
+    font-size 0.37rem // 14px
+    line-height 1.6
+    margin-bottom 0.21rem // 8px
+    padding-left 0
+
+.contact
+  text-align center
+  border-top 1px solid rgba(0, 0, 0, 0.1)
+  padding-top 0.53rem // 20px
+  
+  p
+    color #999
+    font-size 0.32rem // 12px
+    margin 0 0 0.11rem 0 // 0 0 4px 0
+
+// 响应式适配
+@media (max-width: 375px)
+  .userSection
+    padding 0.43rem 0.32rem // 16px 12px
+  
+  .featureCards
+    padding 0 0.32rem // 0 12px
+    margin 0.32rem // 12px
+    
+  .contentGrid
+    padding 0.21rem 0.32rem 0.43rem // 8px 12px 16px
+
+@media (max-width: 320px)
+  .nickname
+    font-size 0.59rem // 22px
+    
+  .statsRow
+    gap 0.53rem // 20px
+    
+  .statNumber
+    font-size 0.53rem // 20px

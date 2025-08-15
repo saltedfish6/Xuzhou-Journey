@@ -1,41 +1,61 @@
 .home
-  min-height 100vh
+  height 100%
   background #f8f9fa
-  padding-bottom 60px // 为底部导航栏留出空间
+  overflow-y auto
+  padding-bottom 1.6rem // 120px - 减少底部空间
+  scroll-behavior smooth
+  
+  // 使用通用滚动条样式
+  composes custom-scrollbar from global
 
 .header
   position sticky
   top 0
   z-index 100
-  background white
-  padding 12px 16px
-  border-bottom 1px solid #f0f0f0
+  padding 0.11rem 0.16rem // 8px 12px - 减少内边距
+  border-bottom 0.01rem solid rgba(0, 0, 0, 0.05) // 1px
+  
+  // 使用通用毛玻璃效果和阴影
+  composes glass-effect from global
+  composes shadow-light from global
 
 .searchBar
   display flex
   align-items center
-  background #f5f5f5
-  border-radius 20px
-  padding 8px 16px
-  transition all 0.3s ease
+  background rgba(245, 245, 245, 0.8)
+  backdrop-filter blur(0.13rem) // 10px
+  padding 0.08rem 0.16rem // 6px 12px - 进一步减少内边距
   position relative
+  border 0.01rem solid rgba(255, 255, 255, 0.8) // 1px
+  
+  // 使用通用样式类
+  composes radius-large from global
+  composes transition-normal from global
+  composes shadow-light from global
 
   &:active
-    background #e9ecef
+    background rgba(233, 236, 239, 0.9)
+    transform scale(0.98)
 
 .searchIcon
-  width 40px
-  height 40px
+  width 0.53rem // 40px
+  height 0.53rem // 40px
   color #666
-  margin-right 10px
+  margin-right 0.13rem // 10px
   flex-shrink 0
+
+.searchText
+  flex 1
+  font-size 0.43rem // 32px
+  color #999
+  user-select none
 
 .searchInput
   flex 1
   background transparent
   border none
   outline none
-  font-size 32px
+  font-size 0.43rem // 32px
   color #333
   padding 0
   margin 0
@@ -44,42 +64,90 @@
     color #999
 
 .searchButton
-  background #007bff
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
   color white
   border none
-  border-radius 16px
-  padding 6px 16px
-  font-size 28px
-  margin-left 10px
+  border-radius 0.21rem // 16px
+  padding 0.08rem 0.21rem // 6px 16px
+  font-size 0.37rem // 28px
+  margin-left 0.13rem // 10px
   cursor pointer
-  transition all 0.2s ease
+  transition all 0.3s ease
+  box-shadow 0 0.05rem 0.16rem rgba(102, 126, 234, 0.3) // 4px 12px
 
   &:active
-    background #0069d9
+    background linear-gradient(135deg, #5a71d6 0%, #6a4492 100%)
+    transform scale(0.95)
+    box-shadow 0 0.03rem 0.11rem rgba(102, 126, 234, 0.2) // 2px 8px
+
+// 热门推荐样式
+.hotRecommend
+  background rgba(255, 255, 255, 0.95)
+  backdrop-filter blur(0.27rem) // 20px
+  padding 0.21rem // 16px
+  border-bottom 0.01rem solid rgba(0, 0, 0, 0.05) // 1px
+  box-shadow 0 0.03rem 0.16rem rgba(0, 0, 0, 0.03) // 2px 12px
+
+.hotTitle
+  font-size 0.43rem // 32px
+  font-weight 600
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  -webkit-background-clip text
+  -webkit-text-fill-color transparent
+  margin-bottom 0.21rem // 16px
+
+.hotList
+  display flex
+  flex-wrap wrap
+  gap 0.16rem // 12px
+
+.hotItem
+  background rgba(245, 245, 245, 0.8)
+  backdrop-filter blur(0.13rem) // 10px
+  color #333
+  padding 0.11rem 0.21rem // 8px 16px
+  border-radius 0.27rem // 20px
+  font-size 0.37rem // 28px
+  cursor pointer
+  transition all 0.3s ease
+  border 0.01rem solid rgba(255, 255, 255, 0.8) // 1px
+  box-shadow 0 0.03rem 0.11rem rgba(0, 0, 0, 0.05) // 2px 8px
+  
+  &:hover
+    background rgba(102, 126, 234, 0.1)
+    color #667eea
+    transform translateY(-0.03rem) // -2px
+    box-shadow 0 0.05rem 0.16rem rgba(102, 126, 234, 0.15) // 4px 12px
+  
+  &:active
+    transform scale(0.95)
+    box-shadow 0 0.03rem 0.11rem rgba(102, 126, 234, 0.1) // 2px 8px
 
 .searchPanel
   position absolute
   top 100%
   left 0
   right 0
-  background white
-  border-radius 0 0 12px 12px
-  box-shadow 0 4px 12px rgba(0, 0, 0, 0.1)
-  margin-top 4px
-  padding 16px
+  background rgba(255, 255, 255, 0.98)
+  backdrop-filter blur(0.27rem) // 20px
+  border-radius 0 0 0.21rem 0.21rem // 16px
+  box-shadow 0 0.11rem 0.32rem rgba(0, 0, 0, 0.1) // 8px 24px
+  margin-top 0.05rem // 4px
+  padding 0.21rem // 16px
   max-height 70vh
   overflow-y auto
   z-index 101
+  border 0.01rem solid rgba(255, 255, 255, 0.8) // 1px
 
 .sectionTitle
-  font-size 28px
+  font-size 0.37rem // 28px
   color #666
-  margin 0 0 12px 0
-  padding-bottom 8px
-  border-bottom 1px solid #f0f0f0
+  margin 0 0 0.16rem 0 // 12px
+  padding-bottom 0.11rem // 8px
+  border-bottom 0.01rem solid #f0f0f0 // 1px
 
 .suggestionsContainer
-  margin-bottom 20px
+  margin-bottom 0.27rem // 20px
 
 .suggestionsList
   list-style none
@@ -89,37 +157,37 @@
 .suggestionItem
   display flex
   align-items center
-  padding 12px 8px
-  font-size 30px
+  padding 0.16rem 0.11rem // 12px 8px
+  font-size 0.4rem // 30px
   color #333
   cursor pointer
-  border-radius 8px
+  border-radius 0.11rem // 8px
   transition background-color 0.2s ease
 
   &:hover, &:active
     background-color #f5f5f5
 
 .suggestionIcon
-  width 20px
-  height 20px
+  width 0.27rem // 20px
+  height 0.27rem // 20px
   color #999
-  margin-right 12px
+  margin-right 0.16rem // 12px
   flex-shrink 0
 
 .hotSearchContainer
-  margin-bottom 10px
+  margin-bottom 0.13rem // 10px
 
 .hotKeywordsList
   display flex
   flex-wrap wrap
-  gap 12px
+  gap 0.16rem // 12px
 
 .hotKeywordItem
   background #f5f5f5
   color #333
-  padding 8px 16px
-  border-radius 16px
-  font-size 28px
+  padding 0.11rem 0.21rem // 8px 16px
+  border-radius 0.21rem // 16px
+  font-size 0.37rem // 28px
   cursor pointer
   transition all 0.2s ease
 
@@ -128,28 +196,37 @@
 
 .tabs
   display flex
-  background white
-  padding 0 16px
-  border-bottom 1px solid #f0f0f0
+  background rgba(255, 255, 255, 0.95)
+  backdrop-filter blur(0.27rem) // 20px
+  padding 0 0.21rem // 16px
+  border-bottom 0.01rem solid rgba(0, 0, 0, 0.05) // 1px
   overflow-x auto
   scrollbar-width none
   -ms-overflow-style none
+  box-shadow 0 0.03rem 0.11rem rgba(0, 0, 0, 0.03) // 2px 8px
 
   &::-webkit-scrollbar
     display none
 
 .tab
   flex-shrink 0
-  padding 12px 16px
-  font-size 32px
+  padding 0.11rem 0.16rem // 8px 12px - 减少内边距
+  font-size 0.37rem // 28px - 减少字体大小
   color #666
   cursor pointer
   position relative
-  transition color 0.3s ease
+  transition all 0.3s ease
+  border-radius 0.16rem // 12px - 减少圆角
+  margin 0.03rem 0.03rem // 2px 2px - 减少外边距
+  
+  &:hover
+    background rgba(102, 126, 234, 0.05)
+    color #667eea
 
   &.active
-    color #007bff
+    color #667eea
     font-weight 600
+    background rgba(102, 126, 234, 0.1)
 
     &::after
       content ''
@@ -157,69 +234,100 @@
       bottom 0
       left 50%
       transform translateX(-50%)
-      width 20px
-      height 2px
-      background #007bff
-      border-radius 1px
+      width 0.27rem // 20px
+      height 0.04rem // 3px
+      background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+      border-radius 0.02rem // 1.5px
+      box-shadow 0 0.01rem 0.05rem rgba(102, 126, 234, 0.3) // 1px 4px
 
 .content
   flex 1
   overflow hidden
+  
+  // 下拉刷新样式优化
+  :global(.rv-pull-refresh)
+    height 100%
+    
+  :global(.rv-pull-refresh__track)
+    min-height 100%
+    
+  :global(.rv-pull-refresh__head)
+    background rgba(255, 255, 255, 0.95)
+    backdrop-filter blur(20px)
+    border-radius 0 0 16px 16px
+    box-shadow 0 2px 8px rgba(0, 0, 0, 0.05)
+    
+  :global(.rv-pull-refresh__loading)
+    color #667eea
+    font-size 32px
 
 .loadingContainer
   display flex
   justify-content center
   align-items center
-  padding 60px 20px
-  color #666
-  font-size 32px
+  padding 0.8rem 0.27rem // 60px 20px
+  color #667eea
+  font-size 0.43rem // 32px
+  background linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)
+  border-radius 0.21rem // 16px
+  margin 0.21rem // 16px
 
 .emptyContainer
   display flex
   flex-direction column
   justify-content center
   align-items center
-  padding 60px 20px
+  padding 0.8rem 0.27rem // 60px 20px
   text-align center
+  background rgba(255, 255, 255, 0.8)
+  backdrop-filter blur(0.13rem) // 10px
+  border-radius 0.21rem // 16px
+  box-shadow 0 0.05rem 0.21rem rgba(0, 0, 0, 0.05) // 4px 16px
+  margin 0.21rem // 16px
+  border 0.01rem solid rgba(255, 255, 255, 0.8) // 1px
 
 .emptyIcon
-  font-size 120px
-  margin-bottom 20px
+  font-size 1.6rem // 120px
+  margin-bottom 0.27rem // 20px
+  background linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  -webkit-background-clip text
+  -webkit-text-fill-color transparent
 
 .emptyText
-  color #999
-  font-size 32px
+  color #666
+  font-size 0.43rem // 32px
   line-height 1.6
+  font-weight 500
 
 .waterfallContainer
-  padding 8px
+  padding 0.05rem // 4px - 减少内边距
 
 // 移动端优化
 @media (max-width: 768px)
   .home
-    padding-bottom 50px
+    padding-bottom 0.67rem // 50px
 
   .header
-    padding 10px 12px
+    padding 0.13rem 0.16rem // 10px 12px
 
   .searchBar
-    padding 10px 14px
+    padding 0.13rem 0.19rem // 10px 14px
 
   .searchText
-    font-size 30px
+    font-size 0.4rem // 30px
 
   .tab
-    padding 14px 18px
-    font-size 30px
+    padding 0.19rem 0.24rem // 14px 18px
+    font-size 0.4rem // 30px
 
   .waterfallContainer
-    padding 8px
+    padding 0.11rem // 8px
 
   .loadingContainer
-    font-size 30px
+    font-size 0.4rem // 30px
 
   .emptyText
-    font-size 30px
+    font-size 0.4rem // 30px
 
   .emptyIcon
-    font-size 110px
+    font-size 1.47rem // 110px
