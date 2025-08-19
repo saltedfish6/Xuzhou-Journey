@@ -89,8 +89,8 @@ pnpm preview
 - **地图功能**: POI 搜索、路径规划、地理编码
 
 ### AI 集成
-- **多模型支持**: GPT-4、Claude、Gemini
-- **流式响应**: Server-Sent Events
+- **多模型支持**: deepseek、moonshot、gemini
+- **流式响应**: Server-Sent Events（正在实现ing）
 - **上下文管理**: 会话持久化
 
 ### 开发工具
